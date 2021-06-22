@@ -1,0 +1,55 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+}
+
+.screen{
+  display: flex;
+}
+
+.left-side{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.left-side img{
+  max-width: 400px;
+}
+.right-side{
+  margin: 0;
+  width: 400px;
+  height: 100vh;
+  background-color: aquamarine;
+  padding: 50px;
+  padding-top: 0px;
+}
+
+.right-side h1{
+  display: block;
+  text-align: center;
+}
+
+.right-side label{
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.right-side input{
+  padding: 10px;
+  font-size: 17px;
+  width: 100%;
+  outline: none;
+  border-color: azure;
+  border-radius: 5px;
+}
+
+.error{
+  font-size: 1rem;
+  color: red;
+}

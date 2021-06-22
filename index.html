@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Validador de formulário</title>
+</head>
+<body>
+  <div class="screen">
+    <div class="left-side">
+      <img src="./assets/ilustracao.jpg" alt="">
+    </div>
+    <div class="right-side">
+      <h1>Registre-se</h1>
+      <form method="POST" action="proximopasso.php" class="validator">
+        <label>
+          Digite seu nome: <br>
+          <input type="text" name="text" data-rules="required|min=2">
+        </label>
+        <label>
+          Digite seu email: <br>
+          <input type="text" name="email" data-rules="required|email">
+        </label>
+        <label>
+          Digite sua senha: <br>
+          <input type="password" name="password" data-rules="required|min=4|password">
+        </label>
+        <label>
+          Digite sua senha novamente: <br>
+          <input type="password" name="password" data-rules="required|min=4|password">
+        </label>
+        <label>
+          <input type="submit" value="Cadastrar" style="color: antiquewhite; background-color: black; font-weight: bolder;">
+        </label>
+      </form>
+    </div>
+</div>
+<script src="./script.js"></script>
+</body>
+</html>
