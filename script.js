@@ -1,23 +1,27 @@
-let toWin = {
-  handleSubmit:(event)=>{
+let goWin = {
+  handleSubmit(event){
     event.preventDefault();
 
-    let send=true;
-    let inputs = form.querySelectorAll("input");
+    let send = true;
+    let inputs = document.querySelectorAll(".campo");
 
-    toWin.clearErrors();
+    goWin.clearError();
 
-    for(let i = 0; i < inputs.length; i++){
+    for(let i=0; i<inputs.length; i++){
       let input = inputs[i];
-      let check = toWin.checkInput(input);
-
-      if(check !== true){
-        send=false;
-        toWin.showError(input, check);
+      let check = goWin.checkInput(input);
+      
+      if(check!== true){
+        send = false;
+        goWin.showError(input, check);
       }
     }
     if(send){
-      form.submit();
+      dados.push({'Nome: ': document.querySelectorAll(".campo")[0].value},
+                  {'Email: ': document.querySelectorAll(".campo")[1].value},
+                  {'Senha: ': 'Confidencial'});
+      console.log(dados);
+      setTimeout(()=>{form.submit()}, 5000);
     }
   },
   checkInput:(input)=>{
@@ -28,53 +32,58 @@ let toWin = {
       for(let k in rules){
         let rDetails = rules[k].split("=");
         switch(rDetails[0]){
-          case 'required':
+          case "required":
             if(input.value === ''){
-              return "Este campo é obrigatório"
+              return "Este campo é obrigatório";
             }
             break;
-          case 'min':
+          case "min":
             if(input.value.length < rDetails[1]){
               return "Este campo tem que ter no mínimo " +rDetails[1]+ " caracteres";
             }
             break;
-          case 'email':
+          case "email":
             let regex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+            //expressão regular
             if(!regex.test(input.value.toLowerCase())){
-              return "Este email não é válido";
+            return "Email inválido";
             }
             break;
-          case 'password':
-            if(document.getElementsByTagName("input")[2].value !== document.getElementsByTagName("input")[3].value){
-              return "Senhas não conferem"
-              }
+          case "password":
+            let p1 = document.getElementsByTagName("input")[2].value;
+            let p2 = document.getElementsByTagName("input")[3].value;
+            if(p2 !== p1){
+              return "Senhas diferentes";
+            }
+            break;
         }
       }
     }
     return true;
   },
-  showError: (input, error)=>{
+  showError:(input, error)=>{
     input.style.borderColor = 'red';
 
-    let errorElement = document.createElement("div");
+    let elError = document.createElement("div");
 
-    errorElement.classList.add('error');
-    errorElement.innerHTML = error;
-    input.parentElement.insertBefore(errorElement, input.nextElementSibling);
+    elError.classList.add("error");
+    elError.innerHTML = error;
+    input.parentElement.insertBefore(elError, input.nextElementSibling);
   },
-  clearErrors:()=>{
-    let colorError = document.querySelectorAll("input");
-    for(let i=0; i < colorError.length; i++){
+  clearError:()=>{
+    let colorError = document.querySelectorAll(".campo");
+    for(let i=0; i<colorError.length; i++){
       colorError[i].style = '';
     }
 
-    let delElement = document.querySelectorAll(".error");
-    for(let i=0; i < delElement.length; i++){
-      delElement[i].remove();
+    let elErrors = document.querySelectorAll(".error");
+    for(let i=0; i<elErrors.length; i++){
+      elErrors[i].remove();
     }
   }
 }
 
 let form = document.querySelector(".validator");
+let dados = [];
 
-form.addEventListener('submit', toWin.handleSubmit);
+form.addEventListener('submit', goWin.handleSubmit);
